@@ -19,6 +19,12 @@ namespace MvcCoreAdoNet.Controllers
             return View(hospitales);
         }
 
+        public IActionResult Delete(int id)
+        {
+            this.repo.DeleteHospital(id);
+            return RedirectToAction("Index");
+        }
+
         public IActionResult Details(int id)
         {
             Hospital hospital = this.repo.FindHospital(id);
@@ -36,7 +42,7 @@ namespace MvcCoreAdoNet.Controllers
             this.repo.CreateHospital(hospital.IdHospital, hospital.Nombre
                 , hospital.Direccion, hospital.Telefono, hospital.Camas);
             ViewData["MENSAJE"] = "Hospital insertado";
-            return View();
+            return RedirectToAction("Index");
         }
 
         public IActionResult Update(int id)
